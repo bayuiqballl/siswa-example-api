@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/bayuiqballl/go-echo/models"
@@ -64,6 +65,6 @@ func main() {
 
 	app(e, store)
 
-	e.Logger.Fatal(e.Start(":9000"))
+	e.Logger.Fatal(e.Start(":" + os.Getenv("PORT")))
 
 }
