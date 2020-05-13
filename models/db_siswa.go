@@ -4,6 +4,8 @@ import (
 	"database/sql"
 	"log"
 	"os"
+
+	"github.com/joho/godotenv"
 )
 
 type SiswaMysql struct {
@@ -11,9 +13,10 @@ type SiswaMysql struct {
 }
 
 func NewSiswaStoreMysql() SiswaStore {
-	// godotenv.Load()
+	godotenv.Load()
 	// dsn := "root:password@tcp(localhost:3307)/echo_go?parseTime=true&clientFoundRows=true"
-	dsn := os.Getenv("DB_NAME") + ":" + os.Getenv("DB_PASS") + "@tcp(" + os.Getenv("DB_HOST") + ")/  " + os.Getenv("DB_USER") + "  ?parseTime=true&clientFoundRows=true"
+	dsn := os.Getenv("DB_USER") + ":" + os.Getenv("DB_PASS") + "@tcp(" + os.Getenv("DB_HOST") + ")/" + os.Getenv("DB_NAME") + "?parseTime=true&clientFoundRows=true"
+	// dsn := os.Getenv("DB_NAME") + ":" + os.Getenv("DB_PASS") + "@tcp(" + os.Getenv("DB_HOST") + ")/  " + os.Getenv("DB_USER") + "  ?parseTime=true&clientFoundRows=true"
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {
 		panic(err)
