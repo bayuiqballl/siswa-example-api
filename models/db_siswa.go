@@ -3,6 +3,7 @@ package models
 import (
 	"database/sql"
 	"log"
+	"os"
 )
 
 type SiswaMysql struct {
@@ -10,7 +11,8 @@ type SiswaMysql struct {
 }
 
 func NewSiswaStoreMysql() SiswaStore {
-	dsn := "root:password@tcp(localhost:3307)/echo_go?parseTime=true&clientFoundRows=true"
+	// dsn := "root:password@tcp(localhost:3307)/echo_go?parseTime=true&clientFoundRows=true"
+	dsn := os.Getenv("DB_NAME") + ":" + os.Getenv("DB_PASS") + "@tcp(" + os.Getenv("DB_HOST") + ")/echo_go?parseTime=true&clientFoundRows=true"
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {
 		panic(err)
