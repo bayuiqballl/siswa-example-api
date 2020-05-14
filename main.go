@@ -9,6 +9,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 )
 
 func app(e *echo.Echo, store models.SiswaStore) {
@@ -62,7 +63,7 @@ func main() {
 	godotenv.Load()
 	store := models.NewSiswaStoreMysql()
 	e := echo.New()
-
+	e.Use(middleware.CORS())
 	app(e, store)
 
 	e.Logger.Fatal(e.Start(":" + os.Getenv("PORT")))
